@@ -46,17 +46,37 @@ function App() {
   };
 
   return (
-    <div className="mx-auto max-w-screen-md mt-3 py-2 px-4 sm:px-8 md:px-16 lg:px-32 bg-white bg-opacity-10 backdrop-blur-md rounded-lg drop-shadow-lg">
-      {/* <Navbar /> */}
-      <Inputs
-        onSearchChange={handleOnSearchChange}
-        onUnitChange={handleUnitChange}
-      />
-      {currentWeather && <TimeAndDate data={currentWeather} />}
-      {currentWeather && (
-        <TemperatureDetails data={currentWeather} units={units} />
-      )}
-      {forecast && <Forecast data={forecast} units={units} />}
+    <div className="app-root">
+      <div className="app-card">
+        <header className="app-header">
+          <h1 className="app-title">Eco Weather</h1>
+          <p className="app-subtitle">
+            Search any city, switch units, and see today&apos;s details &amp;
+            forecast.
+          </p>
+        </header>
+
+        <div className="search-row">
+          <Inputs
+            onSearchChange={handleOnSearchChange}
+            onUnitChange={handleUnitChange}
+          />
+        </div>
+
+        {currentWeather ? (
+          <>
+            <TimeAndDate data={currentWeather} />
+            <TemperatureDetails data={currentWeather} units={units} />
+          </>
+        ) : (
+          <p className="empty-state">
+            Start by searching for a city or use your current location to see
+            live weather conditions.
+          </p>
+        )}
+
+        {forecast && <Forecast data={forecast} units={units} />}
+      </div>
     </div>
   );
 }

@@ -22,43 +22,34 @@ function Forecast({ data, units }) {
   const tempUnit = units === "metric" ? "°C" : "°F";
 
   return (
-    <div>
-      <div className="flex items-center justify-start my-2">
-        <p className="text-white font-medium">Daily Forecast</p>
+    <div className="forecast-section">
+      <div className="forecast-header">
+        <h3>Upcoming hours</h3>
+        <p>Next 12 forecast points</p>
       </div>
-      <hr className="my-1" />
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-white">
+      <div className="forecast-grid">
         {data.list.slice(0, 12).map((item, idx) => {
           const { formattedTime, formattedDate } = formatToLocalTime(
             item.dt,
             data.city.timezone
           );
           return (
-            <div
-              className="flex items-center justify-between p-2 bg-white/10 rounded-lg backdrop-blur-sm"
-              key={idx}
-            >
-              <div className="flex flex-col items-start">
-                <p className="font-light text-sm">{formattedDate}</p>
-                <p className="font-light text-sm">{formattedTime}</p>
-                <p className="font-medium text-lg">
-                  {Math.round(item.main.temp)}
-                  {tempUnit}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <img
-                  src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                  alt="weather_condition_icon"
-                  className="w-12"
-                />
-              </div>
+            <div className="forecast-card" key={idx}>
+              <p className="forecast-date">{formattedDate}</p>
+              <p className="forecast-time">{formattedTime}</p>
+              <img
+                src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                alt="weather_condition_icon"
+                className="forecast-icon"
+              />
+              <p className="forecast-temp">
+                {Math.round(item.main.temp)}
+                {tempUnit}
+              </p>
             </div>
           );
         })}
       </div>
-      <hr className="my-2" />
     </div>
   );
 }

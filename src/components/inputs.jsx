@@ -52,11 +52,11 @@ function Inputs({ onSearchChange, onUnitChange }) {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center my-5 gap-4">
+    <div className="flex flex-col sm:flex-row justify-center my-6 gap-4">
       <div className="flex flex-row w-full sm:w-3/4 items-center justify-center space-x-4">
         <AsyncPaginate
           type="text"
-          placeholder="Search..."
+          placeholder="Search for a city..."
           debounceTimeout={600}
           value={search}
           onChange={handleOnChange}
@@ -65,22 +65,19 @@ function Inputs({ onSearchChange, onUnitChange }) {
         />
         <UilSearch
           size={25}
-          className="cursor-pointer text-white transition ease-in-out hover:scale-110"
+          className="cursor-pointer text-gray-600 hover:text-gray-800"
+          onClick={() => {}}
         />
         <UilLocationPoint
           size={25}
-          className="cursor-pointer text-white transition ease-in-out hover:scale-110"
+          className="cursor-pointer text-gray-600 hover:text-gray-800"
           onClick={handleGeolocation}
         />
       </div>
       <div className="flex flex-row w-full sm:w-1/4 items-center justify-center">
         <button
           onClick={handleUnitToggle}
-          className="cursor-pointer text-white transition ease-in-out hover:scale-110 rounded-full py-1.5 px-2.5 shadow-lg border-white"
-          style={{
-            transition: "background-color 0.3s ease",
-            boxShadow: isMetric ? "0 0 10px #9865B9" : "0 0 10px #2341AF",
-          }}
+          className="cursor-pointer bg-blue-500 text-white hover:bg-blue-600 rounded-full py-2 px-4 font-medium"
         >
           {isMetric ? "°C" : "°F"}
         </button>
